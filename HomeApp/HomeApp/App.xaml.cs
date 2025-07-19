@@ -9,7 +9,7 @@ namespace HomeApp
         {
             InitializeComponent();
 
-            MainPage = new MainPage();
+            MainPage = new NewDevicePage();
         }
 
         protected override void OnStart()
