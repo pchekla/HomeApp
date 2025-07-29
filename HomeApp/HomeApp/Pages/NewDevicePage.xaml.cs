@@ -1,3 +1,4 @@
+using System;
 using Xamarin.Forms;
  
 namespace HomeApp.Pages
@@ -17,18 +18,22 @@ namespace HomeApp.Pages
            {
                BackgroundColor = Color.AliceBlue,
                Margin = new Thickness(30, 10),
-               Placeholder = "Название"
+               Placeholder = "Название",
+               Style = (Style)App.Current.Resources["ValidInputStyle"]
            };
+           newDeviceName.TextChanged += (sender, e) => InputTextChanged(sender, e, newDeviceName);
            stackLayout.Children.Add(newDeviceName);
- 
+
            // Создание многострочного поля для описания
            var newDeviceDescription = new Editor
            {
                HeightRequest = 200,
                BackgroundColor = Color.AliceBlue,
                Margin = new Thickness(30, 10),
-               Placeholder = "Описание"
+               Placeholder = "Описание",
+               Style = (Style)App.Current.Resources["ValidInputStyle"]
            };
+           newDeviceDescription.TextChanged += (sender, e) => InputTextChanged(sender, e, newDeviceDescription);
            stackLayout.Children.Add(newDeviceDescription);
  
            // Создаем заголовок для переключателя
@@ -54,6 +59,11 @@ namespace HomeApp.Pages
                Margin = new Thickness(30, 10),
                BackgroundColor = Color.Silver,
            };
+           addButton.Clicked += (sender, eventArgs) => AddButtonClicked(sender, eventArgs, new Xamarin.Forms.View[] {
+               newDeviceName,
+               newDeviceDescription,
+               switchControl
+           });
            stackLayout.Children.Add(addButton);
        }
 
@@ -69,6 +79,23 @@ namespace HomeApp.Pages
            }
 
            header.Text = "Использует газ";
+       }
+
+       /// <summary>
+       /// Обработчик-валидатор текстовых полей
+       /// </summary>
+       private void InputTextChanged(object sender, TextChangedEventArgs e, InputView view) {
+           System.Text.RegularExpressions.Regex rgx = new System.Text.RegularExpressions.Regex("[^A-Za-z0-9]");
+           VisualStateManager.GoToState(view, rgx.IsMatch(view.Text) ? "Invalid" : "Valid");
+       }
+
+       /// <summary>
+       /// Кнопка сохранения деактивирует все контролы
+       /// </summary>
+       private void AddButtonClicked(object sender, EventArgs e, Xamarin.Forms.View[] views)
+       {
+           foreach(var view in views)
+               view.IsEnabled = false;
        }
    }
 }

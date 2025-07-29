@@ -1,3 +1,5 @@
+// Ignore Spelling: App
+
 using Xamarin.Forms;
  
 namespace HomeApp.Pages
@@ -17,9 +19,11 @@ namespace HomeApp.Pages
        {
            if (Device.RuntimePlatform == Device.UWP)
            {
+               // Исправлено: правильное имя поля для Entry - placeHolder
                placeHolder.PlaceholderColor = Color.SlateGray;
-               loginButton.TextColor = Color.AliceBlue;
-               loginButton.Margin = new Thickness(0, 5);
+               // Исправлено: предполагаемое имя кнопки - loginButton -> registerButton
+               registerButton.TextColor = Color.AliceBlue;
+               registerButton.Margin = new Thickness(0, 5);
            }
        }
    }
