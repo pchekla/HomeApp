@@ -59,7 +59,7 @@ namespace HomeApp.Pages
                // Создаем объект, отвечающий за распознавание нажатий
                var gesture = new TapGestureRecognizer();
                // Устанавливаем по событию нажатия вызов метода  ShowImage(...) со ссылкой на изображение в качестве аргумента
-               gesture.Tapped += async (sender, e) => await ShowImage(sender, e, homeDevice.Image);
+               gesture.Tapped += (sender, e) => ShowImage(sender, e, homeDevice.Image);
                // Добавляем настроенный распознаватель нажатий в текущий фрейм
                frame.GestureRecognizers.Add(gesture);
  
@@ -71,10 +71,10 @@ namespace HomeApp.Pages
            scrollView.Content = innerStack;
        }
  
-              /// <summary>
+       /// <summary>
        /// Показ изображения по нажатию
        /// </summary>
-       public async Task ShowImage (object sender, EventArgs e, string imageName)
+       public void ShowImage (object sender, EventArgs e, string imageName)
        {
            // Если изображение отсутствует
            if (String.IsNullOrEmpty(imageName))
@@ -94,7 +94,7 @@ namespace HomeApp.Pages
                Content = img;
                return;
            }
-
+ 
            // При наличии изображения - загружаем его по заданному пути
            Image image = new Image();
            image.Source = ImageSource.FromResource($"HomeApp.Images.{imageName}");

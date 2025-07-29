@@ -9,5 +9,6 @@
         <Label Text="HomeApp - Ваш умный дом" FontSize="Title" TextColor="{view:RgbExtension Red=255, Green=0, Blue=0 }" Padding="30,10,30,10" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
         <Button x:Name="loginButton" Text="{x:Static local:LoginPage.BUTTON_TEXT}" Clicked="Login_Click" CornerRadius="{view:ButtonViewExtension ButtonStyle=Round}" />
         <Label x:Name="infoMessage" FontSize="Small" TextColor="Red" Padding="30,10,30,10" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
+        <Label x:Name="runningDevice" FontSize="15" Padding="30,10,30,10" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
     </StackLayout>
 </ContentPage>
